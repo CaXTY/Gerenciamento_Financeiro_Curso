@@ -1,0 +1,25 @@
+﻿
+@model Categoria
+
+<h2>Planejamento Financeiro</h2>
+
+@* // Exibe mensagens de validação, se houver *@
+<div asp-validation-summary="All" class="text-danger"></div>
+
+@* // Formulário para adicionar ou editar uma categoria *@
+<form asp-action="AdicionarCategoria" asp-controller="Home" method="post">
+
+    @* // Campo oculto para o ID da categoria (usado para edição) *@
+    <input type="hidden" asp-for="CategoriaId"/>
+    
+    @* // Campo para o nome da categoria *@
+    <div class="mb-3">
+        <label class="form-label">Categoria:</label>
+        <input class="form-control" type="text" asp-for="Nome"/>
+    </div>
+
+    @* // Botões para salvar ou cancelar a operação *@
+    <button type="submit" class="btn btn-success w-100 mb-2">Adicionar</button>
+    <a asp-action="Index" class="btn btn-danger w-100">Cancelar</a>
+
+</form>

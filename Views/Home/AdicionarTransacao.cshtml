@@ -1,0 +1,59 @@
+﻿
+
+@model Financeiro
+
+<h2>Planejamento Financiero</h2>
+
+@* // Exibe mensagens de validação, se houver *@
+<div asp-validation-summary="All" class="text-danger"></div>
+
+@* // Formulário para adicionar ou editar uma transação *@
+<form asp-action="AdicionarTransacao" asp-controller="Home" method="post">
+
+    @* // Campo oculto para o ID da transação (usado para edição) *@
+    <div class="mb-3">
+        <label class="form-label">Descrição:</label>
+        <input class="form-control" type="text" asp-for="Descricao"/>
+    </div>
+
+    @*// Campo para o valor da transação *@
+    <div class="mb-3">
+        <label class="form-label">Valor (R$):</label>
+        <input class="form-control" type="number" asp-for="Valor" />
+    </div>
+
+    @* // Campo para selecionar a categoria da transação *@
+    <div class="mb-3">
+        <label class="form-label">Categoria:</label>
+        <select 
+            asp-for="CategoriaId"
+            class="form-select"
+            asp-items="@(new SelectList(ViewBag.Categorias, "CategoriaId", "Nome"))">
+
+            <option value=""></option>
+        </select>
+    </div>
+
+  @* // Campo para selecionar a data da operação *@
+    <div class="mb-3">
+        <label class="form-label">Data da Operação:</label>
+        <input class="form-control" type="date" asp-for="DataOperacao" />
+    </div>
+
+    @* // Campo para selecionar o tipo de transação (Entrada ou Saída) *@
+    <div class="mb-3">
+        <label class="form-label">Transação:</label>
+        <select 
+                asp-for="TransacaoId"
+                class="form-select"
+                asp-items="@(new SelectList(ViewBag.Transacoes, "TransacaoId", "Nome"))">
+
+            <option value=""></option>
+        </select>
+    </div>
+
+   @*  // Botões para salvar ou cancelar a operação *@
+    <button type="submit" class="btn btn-success w-100 mb-2">Adicionar</button>
+    <a asp-action="Index" class="btn btn-danger w-100">Cancelar</a>
+
+</form>

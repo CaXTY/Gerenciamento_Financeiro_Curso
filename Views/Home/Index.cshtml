@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Financeiro>
+
+
+
+<div class="row mt-5">
+
+   @*  <-- Exibe as transações -->  *@
+
+    <div class ="text-center">
+
+        <a asp-action="AdicionarTransacao" asp-controller="Home" class="btn btn-success" >Adicionar - Transação</a>
+        <a asp-action="AdicionarCategoria" asp-controller="Home" class="btn btn-warning" >Adicionar - Categoria</a>
+        <a asp-action="SomatoriaValores" asp-controller="Home" class="btn btn-info">Análise - Valores</a>
+
+    </div>
+       
+
+    @*  <-- Filtros de pesquisa --> *@
+    <div class="col-md-2">
+
+        <form asp-action="Filtrar" asp-controller="Home" method="post">
+
+            <div class="mb-3">
+
+                <label class="form-label">Categoria:</label>
+                <select
+                    name="filtro"
+                    class="form-select"
+                    asp-items="@(new SelectList(ViewBag.Categorias, "CategoriaId", "Nome", ViewBag.Filtros.CategoriaId))">
+
+                    <option value="todos">Todos</option>
+
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Data da Operação:</label>
+                <select name="filtro"
+                        class="form-select"
+                        asp-items="@(new SelectList(ViewBag.DataOperacao, "Key", "Value", ViewBag.Filtros.DataOperacao))">
+
+                    <option value="todos">Todos</option>
+
+                </select>
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">Transação:</label>
+                <select
+                    name="filtro"
+                    class="form-select"
+                    asp-items="@(new SelectList(ViewBag.Transacoes, "TransacaoId", "Nome", ViewBag.Filtros.TransacaoId))">
+
+                    <option value="todos">Todos</option>
+
+                </select>
+            </div>
+
+            @* <-- Botões de ação --> *@
+            <button type="submit" class="btn-primary btn w-100 mb-2">Filtrar</button>
+            <a asp-action="Index" asp-route-id="" class="btn btn-primary w-100" >Limpar</a>
+        </form>
+    </div> 
+
+    
+    @*  <-- Exibe as transações financeiras --> *@
+    <div class="col-md-10">
+
+        <table class="table table-light table-bordered mt-2">
+            <thead>
+                <tr>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Data da Operação</th>
+                    <th>Transação</th>
+                    <th>Valor</th>
+                    <th class="w-25"></th>
+                </tr>
+
+            </thead>
+
+            @* <--  -->*@
+            <tbody> 
+                @if (Model != null && Model.Any())
+                {
+                    @foreach (Financeiro financa in Model)
+                    {
+                        <tr>
+                            <td>@financa.Descricao</td>
+                            <td>@(financa.Categoria?.Nome ?? "Sem categoria")</td>
+                            <td>@financa.DataOperacao.ToString("dd/MM/yyyy")</td>
+
+                            @if (financa.Transacao?.Nome == "Ganho")
+                            {
+                                <td style="color:green; font-weight:bold">@financa.Transacao.Nome</td>
+                            }
+                            else
+                            {
+                                <td style="color:red; font-weight:bold">@(financa.Transacao?.Nome ?? "Sem transação")</td>
+                            }
+
+                            <td>R$ @financa.Valor.ToString("F")</td>
+                            <td>
+                                <a asp-action="RemoverTransacao" asp-controller="Home" asp-route-id="@financa.Id" class="btn btn-danger">Remover</a>
+                            </td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">Nenhuma transação encontrada.</td>
+                    </tr>
+                }
+
+
+            </tbody>
+               
+        </table>
+
+    </div>
+
+ </div>   
