@@ -1,15 +1,19 @@
 <h1>Projeto Gerenciamento Financeiro</h1>
 
 <h2> Sobre </h2>
-<p> Projeto criado durante o Curso CrisTech. </p>
+<p> | Projeto criado durante o Curso CrisTech. </p>
 
 ---
 ## Instalação 
 
-1. Clone o repositório ou faça o download dos arquivos.
+| Clone o repositório ou faça o download dos arquivos.
 
 ---
-## 🚀 Tecnologias
+## Autor
+| Carlos Eduardo <br> https://github.com/CaXTY
+
+---
+## 🚀 Tecnologias Utilizadas
 <div>
 
    <img
