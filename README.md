@@ -6,7 +6,8 @@
 ---
 ## Instalação 
 
-| Clone o repositório ou faça o download dos arquivos.
+| Clone o repositório ou faça o download dos arquivos. <br>
+| Abra o arquivo `index.html` no seu navegador.
 
 ---
 ## Autor
